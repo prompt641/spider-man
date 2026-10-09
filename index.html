@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#07080f" />
+<meta name="description" content="SPIDEY TRACKER — a pixel-art retro daily mission tracker. Local-first, no account needed." />
+<title>SPIDEY TRACKER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="base.css" />
+<link rel="stylesheet" href="layout.css" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="effects.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Crect width='8' height='8' fill='%2307080f'/%3E%3Crect x='2' y='1' width='4' height='5' fill='%23e5352b'/%3E%3Crect x='3' y='2' width='1' height='2' fill='%23fff'/%3E%3Crect x='5' y='2' width='1' height='2' fill='%23fff'/%3E%3C/svg%3E" />
+</head>
+<body class="is-booting">
+
+<!-- ===================== FX LAYERS ===================== -->
+<div class="fx fx-scanlines" aria-hidden="true"></div>
+<div class="fx fx-vignette" aria-hidden="true"></div>
+
+<!-- ===================== BOOT SCREEN ===================== -->
+<div id="boot" class="boot" role="status" aria-live="polite">
+  <div class="boot-inner">
+    <div class="boot-logo" id="boot-mascot" aria-hidden="true"></div>
+    <h1 class="boot-title glitch" data-text="SPIDEY TRACKER">SPIDEY TRACKER</h1>
+    <p class="boot-sub">PERSONAL MISSION CONSOLE // v1.0</p>
+    <p class="boot-line" id="boot-line">SYSTEM INITIALIZING...</p>
+    <div class="boot-bar"><div class="boot-bar-fill" id="boot-bar-fill"></div></div>
+    <div class="boot-log" id="boot-log" aria-hidden="true"></div>
+    <button type="button" class="boot-skip" id="boot-skip">▶ ENTER SYSTEM</button>
+  </div>
+</div>
+
+<!-- ===================== APP SHELL ===================== -->
+<div class="app" id="app" hidden>
+
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 12 12" width="26" height="26" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="3" y="1" width="6" height="7" fill="#e5352b"/>
+          <rect x="2" y="2" width="8" height="5" fill="#e5352b"/>
+          <rect x="4" y="3" width="2" height="2" fill="#0b0d16"/>
+          <rect x="7" y="3" width="2" height="2" fill="#0b0d16"/>
+          <rect x="4" y="3" width="1" height="1" fill="#f4f7ff"/>
+          <rect x="7" y="3" width="1" height="1" fill="#f4f7ff"/>
+          <rect x="4" y="9" width="4" height="2" fill="#2b6df0"/>
+        </svg>
+      </span>
+      <span class="brand-text">SPIDEY<em>TRACKER</em></span>
+    </div>
+
+    <div class="topbar-date">
+      <span class="date-dow" id="topbar-dow">—</span>
+      <span class="date-full" id="topbar-date">—</span>
+    </div>
+
+    <div class="topbar-right">
+      <div class="sys-status" id="sys-status" title="System status">
+        <span class="sys-dot" aria-hidden="true"></span>
+        <span class="sys-label">SYSTEM ONLINE</span>
+      </div>
+      <div class="topbar-mascot" id="topbar-mascot" aria-hidden="true"></div>
+      <button type="button" class="icon-btn" id="quick-sound" aria-label="Toggle sound" title="Toggle sound">♪</button>
+    </div>
+  </header>
+
+  <nav class="sidenav" id="sidenav" aria-label="Primary">
+    <div class="sidenav-group-label">// MENU</div>
+    <a class="navlink" href="#/home"     data-nav="home"><span class="nav-ico" aria-hidden="true">⌂</span><span>HOME</span></a>
+    <a class="navlink" href="#/log"      data-nav="log"><span class="nav-ico" aria-hidden="true">≡</span><span>ACTIVITY LOG</span></a>
+    <a class="navlink" href="#/stats"    data-nav="stats"><span class="nav-ico" aria-hidden="true">▚</span><span>STATISTICS</span></a>
+    <a class="navlink" href="#/history"  data-nav="history"><span class="nav-ico" aria-hidden="true">▤</span><span>HISTORY</span></a>
+    <a class="navlink" href="#/settings" data-nav="settings"><span class="nav-ico" aria-hidden="true">⚙</span><span>SETTINGS</span></a>
+    <div class="sidenav-foot">
+      <div class="web-deco" aria-hidden="true"></div>
+      <div class="sidenav-hint">LOCAL STORAGE<br/>NO ACCOUNT NEEDED</div>
+    </div>
+  </nav>
+
+  <main class="view" id="view" tabindex="-1"></main>
+
+  <nav class="bottomnav" id="bottomnav" aria-label="Primary mobile">
+    <a class="bnav" href="#/home"     data-nav="home"><span class="bnav-ico" aria-hidden="true">⌂</span><span class="bnav-lbl">HOME</span></a>
+    <a class="bnav" href="#/log"      data-nav="log"><span class="bnav-ico" aria-hidden="true">≡</span><span class="bnav-lbl">LOG</span></a>
+    <a class="bnav" href="#/stats"    data-nav="stats"><span class="bnav-ico" aria-hidden="true">▚</span><span class="bnav-lbl">STATS</span></a>
+    <a class="bnav" href="#/settings" data-nav="settings"><span class="bnav-ico" aria-hidden="true">⚙</span><span class="bnav-lbl">SETTINGS</span></a>
+  </nav>
+</div>
+
+<!-- ===================== OVERLAY ROOTS ===================== -->
+<div id="modal-root"></div>
+<div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ===================== CORE ===================== -->
+<script src="util.js"></script>
+<script src="missions.js"></script>
+<script src="store.js"></script>
+<script src="timers.js"></script>
+<script src="sound.js"></script>
+<script src="stats.js"></script>
+
+<!-- ===================== UI ===================== -->
+<script src="dom.js"></script>
+<script src="mascot.js"></script>
+<script src="boot.js"></script>
+<script src="modal.js"></script>
+<script src="home.js"></script>
+<script src="log.js"></script>
+<script src="history.js"></script>
+<script src="stats-view.js"></script>
+<script src="settings.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
